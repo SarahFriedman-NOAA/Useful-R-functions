@@ -35,6 +35,10 @@ pic_test <- function(data, tree, tip_states, anc = TRUE, ..){
   
   if(any(class(tree) == "multiPhylo")){
     n <- length(tree)
+    
+    # need to reformat to put into tibble format
+    tree <- structure(tree, class = c("list","multiSimmap","multiPhylo"))   
+    
     # getting mapped edge from each simmap
     sim_tib <- tibble(sim_id = 1:n) %>%
       mutate(simmap = tree,
